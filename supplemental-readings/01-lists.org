@@ -1,4 +1,53 @@
-#+TITLE: Lists
+#+TITLE: More Lists
 
-/Sourced in large part from Samuel Rebelsky's 151 2019 spring course web site,
+/Copied in large part from Samuel Rebelsky's 151 2019 spring course web site,
 which can be found[[https://www.cs.grinnell.edu/~rebelsky/Courses/CSC151/2019S/readings/list-basics.html][ here]]./
+
+* Introduction
+
+In your initial explorations with elm you have investigated a variety of basic types of data, including ~Int~ s, ~String~ s, and ~Bool~ s, as well as some more complicated ones, like ~List~ s, functions, and the ever mysterious ~Html~. You can work on many kinds of problems with just these types. However, when you want to address more complex problems, you will need a solid understanding of both the fundamentals of lists and how to manipulate them.
+
+You may recall that there are five basic issues we should consider when we encounter a new type: its name, its purpose, how one expresses values in the type, how the computer displays values in the type, and what operations are available to you. (It may seem that we are repeating this list of issues; that’s because we want you to accustom yourself to asking about those five issues each time you encounter or design a new type.)
+
+* Creating lists
+The easiest way to create a list is with list literals, like we have already
+seen:
+
+#+BEGIN_SRC elm
+counting = [1,2,3]
+letters = ["a","b","c"]
+whoHappy = [("Grumpy Cat", False), ("Pharrell", True)]
+lonelyList = ["lonely :("]
+emptyList = []
+#+END_SRC
+
+We can also construct lists with functions, like ~singleton~, ~repeat~, and
+~range~:
+
+#+BEGIN_SRC elm
+> singleton 3.14
+ [3.14] : List Float
+> repeat 3 "Run away!"
+ ["Run away!", "Run away!", "Run away!"] : List String
+> range 0 4
+ [0, 1, 2, 3, 4] : List Int
+> range 4 0
+ []
+> String.toList "Pickles!"
+ ['P', 'i', 'c', 'k', 'l', 'e', 's', '!']
+#+END_SRC
+
+We can pull values out of lists using ~List.take~ and ~List.head~:
+
+#+BEGIN_SRC elm
+> List.take 3 ["You'll", "never", "take", "me!"]
+ ["You'll", "never", "take"] : List String
+> List.take 8 [1.1,2.2,3.3]
+ [1.1, 2.2, 3.3] : List Float
+> List.head ["Sandals", "are" ++ "n't", "food"]
+ Just "Sandals" : Maybe String
+> List.head []
+ Nothing : Maybe String
+#+END_SRC
+
+Remove them with ~List.drop~ and ~List.tail~:
