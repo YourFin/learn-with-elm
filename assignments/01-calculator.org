@@ -104,7 +104,7 @@ writing a helper function for rendering operators?
  - Limit the number of stack items displayed to 8, with
    "...and {amount remaining} more" at the top of the stack display.
  - Add additional operators to your liking.
- - Add the [[https://package.elm-lang.org/packages/elm/html/latest/Html-Attributes#disabled][~disabled~]] property to operations for which there aren't enough items
+ - Add the [[https://package.elm-lang.org/packages/elm/html/latest/Html-Attributes#disabled][disabled]] property to operations for which there aren't enough items
    on the stack to preform.
  - Re-write your program such that the only ~Maybe~ or ~Result~ (or similar)
    value in your code is the one for reading doubles from your ~input~ box.
