@@ -1,7 +1,7 @@
 #+TITLE: More Lists
 
-/Copied in large part from Samuel Rebelsky's 151 2019 spring course web site,
-which can be found[[https://www.cs.grinnell.edu/~rebelsky/Courses/CSC151/2019S/readings/list-basics.html][ here]]./
+/Borrowed in large part from Samuel Rebelsky's 151 2019 spring course web site,
+[[https://www.cs.grinnell.edu/~rebelsky/Courses/CSC151/2019S/readings/list-basics.html][here]], [[https://www.cs.grinnell.edu/~rebelsky/Courses/CSC151/2019S/readings/homogeneous-lists.html][here]], and [[https://www.cs.grinnell.edu/~rebelsky/Courses/CSC151/2019S/readings/homogeneous-lists.html][here]]./
 
 * Introduction
 
@@ -9,7 +9,8 @@ In your initial explorations with elm you have investigated a variety of basic t
 
 You may recall that there are five basic issues we should consider when we encounter a new type: its name, its purpose, how one expresses values in the type, how the computer displays values in the type, and what operations are available to you. (It may seem that we are repeating this list of issues; that’s because we want you to accustom yourself to asking about those five issues each time you encounter or design a new type.)
 
-* Creating lists
+* List Basics
+** Creating lists
 The easiest way to create a list is with list literals, like we have already
 seen:
 
@@ -25,17 +26,33 @@ We can also construct lists with functions, like ~singleton~, ~repeat~, and
 ~range~:
 
 #+BEGIN_SRC elm
-> singleton 3.14
+> List.singleton 3.14
  [3.14] : List Float
-> repeat 3 "Run away!"
+> List.repeat 3 "Run away!"
  ["Run away!", "Run away!", "Run away!"] : List String
-> range 0 4
+> List.range 0 4
  [0, 1, 2, 3, 4] : List Int
-> range 4 0
- []
+> List.range 4 0
+ [] : List Int
 > String.toList "Pickles!"
- ['P', 'i', 'c', 'k', 'l', 'e', 's', '!']
+ ['P', 'i', 'c', 'k', 'l', 'e', 's', '!'] : List Char
 #+END_SRC
+
+** Some List operations
+
+Lists can be put together with the ~++~ and ~append~ functions:
+
+#+BEGIN_SRC elm
+> ['h'] ++ ['i'] ++ ['j']
+ ['h', 'i', 'j'] : List Char
+> append ["Hello", "there"] ["General", "Kenobi"]
+ ["Hello", "there", "General", "Kenobi"] : List String
+> ["We're", "the"] ++ ["same!"]
+ ["We're", "the", "same!"] : List String
+> append ["We're", "the"] ["same!"]
+ ["We're", "the", "same!"] : List String
+#+END_SRC
+
 
 We can pull values out of lists using ~List.take~ and ~List.head~:
 
@@ -51,3 +68,45 @@ We can pull values out of lists using ~List.take~ and ~List.head~:
 #+END_SRC
 
 Remove them with ~List.drop~ and ~List.tail~:
+
+#+BEGIN_SRC elm
+> List.drop 2 [1 - 0.1, 2, 3, 4 + 1]
+ [3,5] : List Float
+> List.drop 5 [[], [], ["aaaaaah", "ha", "ha", "ha", "haa"]]
+ [] : List (List String)
+> List.tail ["potato", "salad", "bowl"]
+ Just ["salad", "bowl"] : List String
+> List.tail ["curry"]
+ Just [] : List String
+> List.tail (List.drop 2 ['a', 'b'])
+ Nothing : List Char
+#+END_SRC
+
+And reverse them with ~List.reverse~:
+
+#+BEGIN_SRC elm
+> List.reverse ["elm", "is", "great"]
+ ["great", "is", "elm"] : List String
+> List.reverse (List.range 1 -1)
+ [-1,0,1] : List Int
+> List.reverse [[1,2,3], [3,2,1]]
+ [[3,2,1],[1,2,3]] : List number
+#+END_SRC
+
+** Self-check:
+1. Predict the results of evaluating the following expressions:
+    #+BEGIN_SRC elm
+    [2,1]
+    List.singleton 1.12
+    List.append [1] [2]
+    List.append [2, 1] [2, 1]
+    List.range -3 0
+    List.range 0 3
+    List.range 0 0
+    List.drop 2 [1, 2, 3]
+    List.tail (["a"] ++ ["b"])
+    #+END_SRC
+1. With only the functions listed above, and no list literals, make the list
+   ~[1,2,6,5,4]~
+1. Write a function ~at : Int -> List a -> Maybe a~ that returns the value at
+   the position given by the first argument, if there is one there.
