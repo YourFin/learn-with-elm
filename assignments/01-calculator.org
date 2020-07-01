@@ -1,0 +1,112 @@
+#+TITLE: Assignment 1: Calculator
+
+Time to build something (at least somewhat) useful, a calculator!
+
+Reverse polish notation calculators turn out to be much easier to build than
+more "modern" ones, so that's what we'll be aiming for.
+
+The core of a reverse-polish notation calculator is its /stack/, or the values
+that it is currently storing.
+The addition operator, for example, pops the first two values off of the stack
+and then places their sum on top of the stack. Before we can add though,
+we need a stack to work on.
+
+* Part 1: Stack me up
+The number type that we will be using is a [[https://package.elm-lang.org/packages/elm/core/latest/Basics#Float][Float]], and we want our stack to be
+able to hold an arbitrary number of them. Create a /type level definition/
+(~type~ or ~type alias~) ~Stack~ to represent this.
+
+Name the value ~emptyStack : Stack~ that represents an empty stack.
+
+Write a function ~pushStack : Float -> Stack -> Stack~ that adds one number to
+the stack in the second argument.
+
+Write a function ~viewStack : Stack -> String~ function that displays each
+element in the stack with a newline (~"\n"~) in between,
+with the most recently pushed item at the top.
+~viewStack (pushStack 2 (pushStack 1 emptyStack))~ should show:
+#+BEGIN_EXAMPLE
+2
+1
+#+END_EXAMPLE
+(Hint: the [[https://package.elm-lang.org/packages/elm/core/latest/List][List module]] has some functions that might help you here).
+
+* Part 2: Pop, Pop!
+Next, write a function ~pop~ that takes in a ~Stack~, and returns said stack
+without the most recently pushed value along, with the most recently pushed
+value /if there was one/.
+
+Remember to start by thinking through the type of this function: what arguments
+it takes, and what it returns. Try to get this nailed down before proceeding to
+implement ~pop~.
+
+Verify that your ~pop~ works by writing a function ~firstTwo : Stack -> String~
+that prints the first two values on the stack if it has > 2 items on it, and
+~"No pop pop :("~ if it has less than two elements available.
+
+#+BEGIN_EXAMPLE
+firstTwo emptyStack ; => "No pop pop :("
+firstTwo (pushStack 1 emptyStack) ; => "No pop pop :("
+firstTwo (pushStack 2 (pushStack 1 emptyStack)) ; => "2 1"
+firstTwo (pushStack 8 (pushStack 9 (pushStack 3.14 emptyStack))) ; => "8 9"
+#+END_EXAMPLE
+
+* Part 3: Operator on line one
+We'll start with a simple operator, ~clearOp : Stack -> Stack~ that
+takes in a stack and returns a cleared stack. Verify that it works by checking
+that ~viewStack (pushStack 2 (clearStack (pushStack 1 emptyStack)))~ returns
+~"2"~.
+
+Next, add an operator ~popOp : Stack -> Stack~ that pulls one value off of
+the stack and throws it away.
+
+These first two operators are simple type-wise as we don't have to worry too
+much about the presence of values when we're throwing them away. However,
+calculating operators /need/ to have values to, well, operate on. This means
+that the type of our other operators will be more complicated than just
+~Stack -> Stack~. Figure out what you want this type to be, and then define a
+~type alias Operator = ...~ for this (function) type.
+
+Now that we have that figured out, we can start defining some operators! You'll
+probably want to have the ~pop~ function you wrote in part two handy. Define:
+ - ~sinOp : Operator~, which uses the ~sin : Float -> Float~ function to
+   calculate the sine of the top of the stack.
+ - ~cosOp : Operator~, which uses the ~cos : Float -> Float~ function to
+   calculate the cosine of the top of the stack.
+ - ~tanOp : Operator~, which uses the ~tan : Float -> Float~ function to
+   calculate the tangent of the top of the stack.
+ - ~addOp : Operator~, which adds the first two values on the stack together.
+ - ~subOp : Operator~, which subtracts the first value on the stack from
+   the second.
+ - ~multOp : Operator~, which multiplies the first two values on the stack.
+ - ~divOp : Operator~, which divides the second value on the stack by the first.
+
+Finally, you may want to modify your ~clearOp and popOp~ such that they are also
+of type operator.
+
+* Part 4: Show me
+We will now go about building a basic elm application that can push items onto a
+stack! For this, we will want an ~input~ box that we can type numbers in, a
+"push to stack" ~button~, a "clear stack" button, a ~div~ with ~text~ in it to
+display the stack, and some way of displaying an error when somebody types in a
+not-number.
+
+You should be able to build this following along from the previous examples,
+starting with your ~Model~ and building your ~init~, ~view~, ~Msg~, and ~update~
+from there.
+
+Once you have the "push" and "clear" buttons working, you should be able to add
+a bunch of buttons for all of the other operators that you wrote. Maybe consider
+writing a helper function for rendering operators?
+
+* Extra credit: (in roughly increasing order of difficulty)
+ - Add line numbers to the stack display.
+ - Limit the number of stack items displayed to 8, with
+   "...and {amount remaining} more" at the top of the stack display.
+ - Add additional operators to your liking.
+ - Add the [[https://package.elm-lang.org/packages/elm/html/latest/Html-Attributes#disabled][~disabled~]] property to operations for which there aren't enough items
+   on the stack to preform.
+ - Re-write your program such that the only ~Maybe~ or ~Result~ (or similar)
+   value in your code is the one for reading doubles from your ~input~ box.
+   This could require a fair bit of fiddling around with your types.
+   (Hint: you'll probably have to drop the generalized ~Operator~ type alias).
