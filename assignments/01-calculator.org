@@ -99,6 +99,8 @@ Once you have the "push" and "clear" buttons working, you should be able to add
 a bunch of buttons for all of the other operators that you wrote. Maybe consider
 writing a helper function for rendering operators?
 
+You're done when you have a fully functional calculator!
+
 * Extra credit: (in roughly increasing order of difficulty)
  - Add line numbers to the stack display.
  - Limit the number of stack items displayed to 8, with
