@@ -1,0 +1,4 @@
+#+TITLE: Lists
+
+/Sourced in large part from Samuel Rebelsky's 151 2019 spring course web site,
+which can be found[[https://www.cs.grinnell.edu/~rebelsky/Courses/CSC151/2019S/readings/list-basics.html][ here]]./
