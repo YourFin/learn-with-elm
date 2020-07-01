@@ -1,4 +1,4 @@
-#+TITLE: More Lists
+#+TITLE: Lists
 
 /Borrowed in large part from Samuel Rebelsky's 151 2019 spring course web site,
 [[https://www.cs.grinnell.edu/~rebelsky/Courses/CSC151/2019S/readings/list-basics.html][here]], [[https://www.cs.grinnell.edu/~rebelsky/Courses/CSC151/2019S/readings/homogeneous-lists.html][here]], and [[https://www.cs.grinnell.edu/~rebelsky/Courses/CSC151/2019S/readings/homogeneous-lists.html][here]]./
