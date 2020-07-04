@@ -109,5 +109,12 @@ And reverse them with ~List.reverse~:
 1. With only the functions listed above, and no list literals, make the list
    ~[1,2,6,5,4]~
 ** Homework:
-1. Write a function ~at : Int -> List a -> Maybe a~ that returns the value at
-   the position given by the first argument, if there is one there.
+1. Write a function
+   #+BEGIN_SRC elm
+   at : Int -> List Char -> Maybe Char
+   at index lst =
+       -- Your code here
+   #+END_SRC
+   ~at : Int -> List Char -> Maybe Char~
+   that returns the value in ~lst~ at the position given by the ~index~, if
+   there is one there.
