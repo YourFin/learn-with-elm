@@ -108,5 +108,6 @@ And reverse them with ~List.reverse~:
     #+END_SRC
 1. With only the functions listed above, and no list literals, make the list
    ~[1,2,6,5,4]~
+** Homework:
 1. Write a function ~at : Int -> List a -> Maybe a~ that returns the value at
    the position given by the first argument, if there is one there.
