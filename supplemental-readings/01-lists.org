@@ -5,9 +5,19 @@
 
 * Introduction
 
-In your initial explorations with elm you have investigated a variety of basic types of data, including ~Int~ s, ~String~ s, and ~Bool~ s, as well as some more complicated ones, like ~List~ s, functions, and the ever mysterious ~Html~. You can work on many kinds of problems with just these types. However, when you want to address more complex problems, you will need a solid understanding of both the fundamentals of lists and how to manipulate them.
+In your initial explorations with elm you have investigated a variety of basic
+types of data, including ~Int~ s, ~String~ s, and ~Bool~ s, as well as some more
+complicated ones, like ~List~ s, functions, and the ever mysterious ~Html~. You
+can work on many kinds of problems with just these types. However, when you want
+to address more complex problems, you will need a solid understanding of both
+the fundamentals of lists and how to manipulate them.
 
-You may recall that there are five basic issues we should consider when we encounter a new type: its name, its purpose, how one expresses values in the type, how the computer displays values in the type, and what operations are available to you. (It may seem that we are repeating this list of issues; that’s because we want you to accustom yourself to asking about those five issues each time you encounter or design a new type.)
+You may recall that there are five basic issues we should consider when we
+encounter a new type: its name, its purpose, how one expresses values in the
+type, how the computer displays values in the type, and what operations are
+available to you. (It may seem that we are repeating this list of issues; that’s
+because we want you to accustom yourself to asking about those five issues each
+time you encounter or design a new type.)
 
 
 * List Basics
@@ -23,11 +33,10 @@ seen:
  ['a', 'b', 'c'] : List Char
 > ["I'm all alone :("]
  ["I'm all alone :("] : List String
-> whoHappy = [("Grumpy Cat", False), ("Pharrell", True)]
- [("Grumpy Cat", False), ("Pharrell", True)] : List (String, Bool)
 #+END_SRC
 
-Notice that all of the lists above only contain values of one type. Let's try building a list with multiple different types of values in it:
+Notice that all of the lists above only contain values of one type. Let's try
+building a list with multiple different types of values in it:
 
 #+BEGIN_SRC elm
 > [0.90, " percent of statistics are made up on the spot"]
@@ -52,10 +61,57 @@ run into unexpected values partway through a List.map, List.foldl, etc. Read
 Hint: Want to convert a String into a Float? Use the String.toFloat function!
 #+END_SRC
 
+Uh oh. It looks like elm isn't happy with that. However, the compiler does tell
+us exactly what is wrong in the first hint: "Everything in a list must be the
+same type of value". Ok, you ask, but what if I want to shove a bunch of ~Bool~
+s and ~Int~ s and ~String~ s together? Well, along with all the elements being
+the same type, the other two key aspects of lists are that
+
+1. With ~List~ s, the order of elements matters, and is part of the information
+   that ~List~ s store.
+1. ~List~ s can hold an arbitrary, potentially /infinite/ number of values, and
+   still be the same type.
+
+Let's think through the implications of this for a second. Since the order of
+elements matters, ~[1,2,3]~ and ~[3,2,1]~ are different values, although they do
+share the same type. We also have that , ~['b', 'b']~, ~['b','b','b']~, and
+~['b', 'b', 'b', 'b]~ all share the same type despite the fact that they all have different numbers of values. This is in contrast to tuples, where ~('b', 'b')~, ~('b', 'b', 'b')~, and ~('b', 'b', 'b', 'b')~ all have different types. ~List~ s, then, allow us to write one function that takes in multiple different amounts of things without having to rewrite the function for different amounts of values.
+
+Now, think about how you would go about processing a list that contained a bunch of ~Bool~ s ~Int~ s and ~String~ s all mixed together. How would you know what the type of a random element is? You can't, really.(footnote: if you want to do this verbatim, take a look at the custom types reading) There's no way to know the type of any given element, so how could you be sure that you're processing it correctly?
+
+This is not to say that can't store multiple ~String~ s, ~Int~ s, and ~Bool~ s
+in the same value, we just need a bit more machinery to pull it off. ~List~ s
+can hold values of any type, not just the basic ones, so we use have ~List~ s of
+tuples to store grouped values of different types:
+
+#+BEGIN_SRC elm
+> [(1, "one"), (2, "two"), (3.5, "three and a half")]
+ [(1, "one"), (2, "two"), (3.5, "three and a half")] : List (Float, String)
+> whoHappy = [("Grumpy Cat", False), ("Pharrell", True)]
+ [("Grumpy Cat", False), ("Pharrell", True)] : List (String, Bool)
+#+END_SRC
+
+We can also have tuples of lists, if we want to construct a single value with
+ungrouped values of different types:
+
+#+BEGIN_SRC elm
+> (["You say it 'tomato'", "No, you say it 'tomato'"], [True, False, False])
+ (["You say it 'tomato'", "No, you say it 'tomato'"], [True, False, False])
+    : (List String, List Bool)
+#+END_SRC
+
+You can even have lists of lists:
+
+#+BEGIN_SRC elm
+> [["cut", "hut", "rut", "what"], ["green", "mean", "sheen"], ["orange"]]
+ [["cut", "hut", "rut", "what"], ["green", "mean", "sheen"], ["orange"]]
+     : List (List String)
+#+END_SRC elm
+
 EMPTY LIST EXPLANATION
 
 We can also construct lists with functions, like ~singleton~, ~repeat~, and
-~range~:
+~range~ :
 
 ,#+BEGIN_SRC elm
 > List.singleton 3.14
