@@ -9,23 +9,55 @@ In your initial explorations with elm you have investigated a variety of basic t
 
 You may recall that there are five basic issues we should consider when we encounter a new type: its name, its purpose, how one expresses values in the type, how the computer displays values in the type, and what operations are available to you. (It may seem that we are repeating this list of issues; that’s because we want you to accustom yourself to asking about those five issues each time you encounter or design a new type.)
 
+
 * List Basics
 ** Creating lists
+We already have the type's name, ~List~, so how about we look at some values.
 The easiest way to create a list is with list literals, like we have already
 seen:
 
 #+BEGIN_SRC elm
-counting = [1,2,3]
-letters = ["a","b","c"]
-whoHappy = [("Grumpy Cat", False), ("Pharrell", True)]
-lonelyList = ["lonely :("]
-emptyList = []
+> counting = [1.0,2.0,3.0]
+ [1,2,3] : List Float
+> ['a', 'b', 'c']
+ ['a', 'b', 'c'] : List Char
+> ["I'm all alone :("]
+ ["I'm all alone :("] : List String
+> whoHappy = [("Grumpy Cat", False), ("Pharrell", True)]
+ [("Grumpy Cat", False), ("Pharrell", True)] : List (String, Bool)
 #+END_SRC
+
+Notice that all of the lists above only contain values of one type. Let's try building a list with multiple different types of values in it:
+
+#+BEGIN_SRC elm
+> [0.90, " percent of statistics are made up on the spot"]
+-- TYPE MISMATCH ---------------------------------------------------------- REPL
+
+The 2nd element of this list does not match all the previous elements:
+
+3|   [0.90, " percent of statistics are made up on the spot"]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The 2nd element is a string of type:
+
+    String
+
+But all the previous elements in the list are:
+
+    Float
+
+Hint: Everything in a list must be the same type of value. This way, we never
+run into unexpected values partway through a List.map, List.foldl, etc. Read
+<https://elm-lang.org/0.19.1/custom-types> to learn how to “mix” types.
+
+Hint: Want to convert a String into a Float? Use the String.toFloat function!
+#+END_SRC
+
+EMPTY LIST EXPLANATION
 
 We can also construct lists with functions, like ~singleton~, ~repeat~, and
 ~range~:
 
-#+BEGIN_SRC elm
+,#+BEGIN_SRC elm
 > List.singleton 3.14
  [3.14] : List Float
 > List.repeat 3 "Run away!"
@@ -34,9 +66,10 @@ We can also construct lists with functions, like ~singleton~, ~repeat~, and
  [0, 1, 2, 3, 4] : List Int
 > List.range 4 0
  [] : List Int
-> String.toList "Pickles!"
- ['P', 'i', 'c', 'k', 'l', 'e', 's', '!'] : List Char
 #+END_SRC
+
+** Strings and lists
+You may be asking yourself at this point why we have a ~String~ type if we also have lists of ~Char~ s. Both data types hold
 
 ** Some List operations
 
