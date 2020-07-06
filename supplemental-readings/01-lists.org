@@ -113,7 +113,7 @@ EMPTY LIST EXPLANATION
 We can also construct lists with functions, like ~singleton~, ~repeat~, and
 ~range~ :
 
-,#+BEGIN_SRC elm
+#+BEGIN_SRC elm
 > List.singleton 3.14
  [3.14] : List Float
 > List.repeat 3 "Run away!"
