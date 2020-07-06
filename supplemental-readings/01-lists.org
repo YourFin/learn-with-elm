@@ -81,7 +81,7 @@ Now, think about how you would go about processing a list that contained a bunch
 
 This is not to say that can't store multiple ~String~ s, ~Int~ s, and ~Bool~ s
 in the same value, we just need a bit more machinery to pull it off. ~List~ s
-can hold values of any type, not just the basic ones, so we use have ~List~ s of
+can hold values of any type, not just the basic ones, so we have ~List~ s of
 tuples to store grouped values of different types:
 
 #+BEGIN_SRC elm
