@@ -77,7 +77,12 @@ elements matters, ~[1,2,3]~ and ~[3,2,1]~ are different values, although they do
 share the same type. We also have that , ~['b', 'b']~, ~['b','b','b']~, and
 ~['b', 'b', 'b', 'b]~ all share the same type despite the fact that they all have different numbers of values. This is in contrast to tuples, where ~('b', 'b')~, ~('b', 'b', 'b')~, and ~('b', 'b', 'b', 'b')~ all have different types. ~List~ s, then, allow us to write one function that takes in multiple different amounts of things without having to rewrite the function for different amounts of values.
 
-Now, think about how you would go about processing a list that contained a bunch of ~Bool~ s ~Int~ s and ~String~ s all mixed together. How would you know what the type of a random element is? You can't, really.(footnote: if you want to do this verbatim, take a look at the custom types reading) There's no way to know the type of any given element, so how could you be sure that you're processing it correctly?
+Now, think about how you would go about processing a list that contained a bunch
+of ~Bool~ s ~Int~ s and ~String~ s all mixed together. How would you know what
+the type of a random element is? You can't, really.(footnote: if you want to do
+this verbatim, take a look at the custom types reading) There's no way to know
+the type of any given element, so how could you be sure that you're processing
+it correctly?
 
 This is not to say that can't store multiple ~String~ s, ~Int~ s, and ~Bool~ s
 in the same value, we just need a bit more machinery to pull it off. ~List~ s
