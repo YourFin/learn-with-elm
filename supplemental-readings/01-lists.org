@@ -276,8 +276,9 @@ like the following:
 #+BEGIN_SRC elm
 (::) (1 : Int) ((::) (2 : Int) ([] : List Int))
 #+END_SRC
-Often times source code would become so buried in types that it became impossible to suss out the actual logic. Then, in 1973, the programming language ML was released, featuring the
-seminal Hindly-Milner type system, which allowed for the most general type of
-any program to be inferred efficiently without type hints. The original ML is a
-relic, but the work it did on type systems has been greatly influential and
-helps lazy programmers (including you) to this day.
+Often times source code would become so buried in types that it became
+impossible to suss out the actual logic. Then, in 1973, the programming language
+ML was released, featuring the seminal Hindly-Milner type system, which allowed
+for the most general type of any program to be inferred efficiently without type
+hints. The original ML is a relic, but the work it did on type systems has been
+greatly influential and helps lazy programmers (including you) to this day.
