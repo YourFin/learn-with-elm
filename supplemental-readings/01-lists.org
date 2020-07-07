@@ -128,14 +128,22 @@ You can even have lists of lists:
 #+END_SRC elm
 
 ** The empty list
-We do have a bit of an elephant in the room though: the empty list. Given that lists can contain any number of values, it stands to reason that they can also contain no values. And, indeed, they can. We represent the empty list just as you would expect, with ~[]~. The interesting question, though, is what is the type of ~[]~. It seems like we should be able to have an empty list of ~String~ s, an empty list of ~Int~ s, an empty list of ~Bool~ s... Right? Well, let's ask elm what type ~[]~ is
+We do have a bit of an elephant in the room though: the empty list. Given that
+lists can contain any number of values, it stands to reason that they can also
+contain no values. And, indeed, they can. We represent the empty list just as
+you would expect, with ~[]~. The interesting question, though, is what is the
+type of ~[]~. It seems like we should be able to have an empty list of ~String~
+s, an empty list of ~Int~ s, an empty list of ~Bool~ s... Right? Well, let's ask
+elm what type ~[]~ is
 #+BEGIN_SRC elm
 > []
 [] : List a
 #+END_SRC
 ...it's a list of ~a~? Huh?
 
-The short answer is that since ~a~ is lowercase, unlike ~String~, it is an unbound /type variable/, meaning that elm doesn't yet have enough information to say what type ~[]~ is.
+The short answer is that since ~a~ is lowercase, unlike ~String~, it is an
+unbound /type variable/, meaning that elm doesn't yet have enough information to
+say what type ~[]~ is.
 
 We can actually give this information explicitly by asserting the type of ~[]~.
 
@@ -186,7 +194,27 @@ it like a ~List Char~. In this way, we can give elm hints about what type we
 intend values to be.[fn:type-inference]
 
 ** Strings and lists
-You may be asking yourself at this point why we have a ~String~ type if we also have lists of ~Char~ s. Both data types hold
+You may be asking yourself at this point why we have a ~String~ type if we also
+have lists of ~Char~ s. Both data types hold an indeterminant number of items,
+right? So why not just use ~List Char~ instead of ~String~?
+
+The answer is mostly "so elm can run faster", but the pattern is common enough
+that it would likely warrant its own name anyways. It is also worth looking
+through the ~String~ library in the elm documentation, as there are many
+~String~ specific functions there that do not make much sense for lists in
+general.
+
+Finally, since ~String~ and ~List Char~ are equivalent in terms of the
+information that they can hold, we can use ~String.fromList~ and ~String.toList~
+to convert between them:
+
+#+BEGIN_SRC elm
+> String.toList "I am a string!"
+['I',' ','a','m',' ','a',' ','s','t','r','i','n','g','!']
+    : List Char
+> String.fromList ['I',' ','a','m',' ','a',' ','l','i','s','t','!']
+"I am a list!" : String
+#+END_SRC
 
 ** Some List operations
 
