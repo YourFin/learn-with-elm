@@ -1,0 +1,42 @@
+#+TITLE: Basic Types
+
+* Introduction
+Thus far we have spent quite a bit of time playing with values in elm, and mentioned that each of the values that we interact with has a type like ~Int~, ~String~, or ~Bool~. We will now take a closer look at what types are, their relation to values, and why we care about them.
+
+* What the type?
+If values are specific things, you can think of types as the class of objects they belong to. You could, say, define a type ~Dog~, and then define values ~balto~ and ~laika~ that are of type ~Dog~. The typical parlance would be that "laika belongs to the type Dog", "balto is of type Dog", or "laika is a Dog" if you wanted to emphasize the type of these values. Notice that the type name ~Dog~ is capitalized and the values names ~laika~ and ~balto~ are not; elm enforces this convention. If you try to assign a value to a name that starts with a capital letter, elm gets confused:
+#+BEGIN_SRC elm
+> foo = 1.2
+1.2 : Float
+> Foo = 1.2
+|
+-- UNEXPECTED EQUALS ------------------------------------------------------ REPL
+
+I was not expecting to see this equals sign:
+
+10|   Foo = 1.2
+          ^
+Maybe you want == instead? To check if two values are equal?
+
+Note: I may be getting confused by your indentation. I think I am still parsing
+the `repl_input_value_` definition. Is this supposed to be part of a definition
+after that? If so, the problem may be a bit before the equals sign. I need all
+definitions to be indented exactly the same amount, so the problem may be that
+this new definition has too many spaces in front of it.
+#+END_SRC
+
+
+~0̵̞͒̉̈%̸̞̀̾͑̋ͅ2̷̯̌æ̷̪̪̬̥̌̉͒͝)̸̻̯͉̏̐͛̇)̴̹̞̬͗̊͘)̶̖̹͇̬͛͘~
+
+* Basic types, revisited
+** Bool
+
+** Int
+
+** Float
+
+** String
+
+** Tuples
+
+* Function types
