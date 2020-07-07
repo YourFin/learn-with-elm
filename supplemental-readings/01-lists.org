@@ -127,7 +127,63 @@ You can even have lists of lists:
      : List (List String)
 #+END_SRC elm
 
-EMPTY LIST EXPLANATION
+** The empty list
+We do have a bit of an elephant in the room though: the empty list. Given that lists can contain any number of values, it stands to reason that they can also contain no values. And, indeed, they can. We represent the empty list just as you would expect, with ~[]~. The interesting question, though, is what is the type of ~[]~. It seems like we should be able to have an empty list of ~String~ s, an empty list of ~Int~ s, an empty list of ~Bool~ s... Right? Well, let's ask elm what type ~[]~ is
+#+BEGIN_SRC elm
+> []
+[] : List a
+#+END_SRC
+...it's a list of ~a~? Huh?
+
+The short answer is that since ~a~ is lowercase, unlike ~String~, it is an unbound /type variable/, and therefore that elm doesn't yet have enough information to say what type ~[]~ is.
+
+We can actually give it this information explicitly by asserting the type of ~[]~.
+
+#+BEGIN_SRC elm
+> empty = []
+[] : List a
+> emptyFloats : List Float
+| noInts = []
+|
+[] : List Float
+#+END_SRC
+
+Now notice what happens if we try to use that value like a ~List Char~:
+
+#+BEGIN_SRC elm
+> (::) 1.0 empty
+[1] : List Float
+
+> (::) 'a' empty
+['a'] : List Char
+
+> (::) 1.0 emptyFloats
+[1] : List Float
+
+> (::) 'a' emptyFloats
+-- TYPE MISMATCH ---------------------------------------------------------- REPL
+
+The 2nd argument to (::) is not what I expect:
+
+10|   (::) 'a' emtpyFloats
+               ^^^^^^^^^^^
+This `emptyFloats` value is a:
+
+    List Float
+
+But (::) needs the 2nd argument to be:
+
+    List Char
+
+Hint: I always figure out the argument types from left to right. If an argument
+is acceptable, I assume it is “correct” and move on. So the problem may actually
+be in one of the previous arguments!
+#+END_SRC
+
+Even though we ~empty~ and ~emptyFloats~ appear to have the same value, because
+we resolved the type of ~emptyFloats~ to ~List Float~ we could no longer treat
+it like a ~List Char~. In this way, we can give elm hints about what type we
+intend values to be.[fn:type-inference]
 
 ** Strings and lists
 You may be asking yourself at this point why we have a ~String~ type if we also have lists of ~Char~ s. Both data types hold
@@ -212,3 +268,17 @@ And reverse them with ~List.reverse~:
    ~at : Int -> List Char -> Maybe Char~
    that returns the value in ~lst~ at the position given by the ~index~, if
    there is one there.
+
+[fn:type-inference] Programming history note: Back in the olden days, compilers
+could not automatically figure out the types of variables. In order for programs
+to work, the programmer would have to write compiler hints all over the place,
+like the following:
+#+BEGIN_SRC elm
+(::) (1 : Int) ((::) (2 : Int) ([] : List Int))
+#+END_SRC
+Often times source code would become so buried in types that it became hard to
+read. Then, in 1973, the programming language ML was released, featuring the
+seminal Hindly-Milner type system, which allowed for the most general type of
+any program to be inferred efficiently without type hints. The original ML is a
+relic, but the work it did on type systems has been greatly influential and
+helps lazy programmers (including you) to this day.
