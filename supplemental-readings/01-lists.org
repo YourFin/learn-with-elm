@@ -135,15 +135,15 @@ We do have a bit of an elephant in the room though: the empty list. Given that l
 #+END_SRC
 ...it's a list of ~a~? Huh?
 
-The short answer is that since ~a~ is lowercase, unlike ~String~, it is an unbound /type variable/, and therefore that elm doesn't yet have enough information to say what type ~[]~ is.
+The short answer is that since ~a~ is lowercase, unlike ~String~, it is an unbound /type variable/, meaning that elm doesn't yet have enough information to say what type ~[]~ is.
 
-We can actually give it this information explicitly by asserting the type of ~[]~.
+We can actually give this information explicitly by asserting the type of ~[]~.
 
 #+BEGIN_SRC elm
 > empty = []
 [] : List a
 > emptyFloats : List Float
-| noInts = []
+| emptyFloats = []
 |
 [] : List Float
 #+END_SRC
@@ -276,8 +276,7 @@ like the following:
 #+BEGIN_SRC elm
 (::) (1 : Int) ((::) (2 : Int) ([] : List Int))
 #+END_SRC
-Often times source code would become so buried in types that it became hard to
-read. Then, in 1973, the programming language ML was released, featuring the
+Often times source code would become so buried in types that it became impossible to suss out the actual logic. Then, in 1973, the programming language ML was released, featuring the
 seminal Hindly-Milner type system, which allowed for the most general type of
 any program to be inferred efficiently without type hints. The original ML is a
 relic, but the work it did on type systems has been greatly influential and
