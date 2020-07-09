@@ -1,0 +1,5 @@
+#+TITLE: Useful resources:
+
+[[https://thoughtbot.com/blog/modeling-with-union-types][Modeling with union types blog post, recommended by some part of the elm internals]]
+
+[[http://faq.elm-community.org/operators.html][Elm operator precedence reference]]
