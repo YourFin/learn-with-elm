@@ -3,8 +3,46 @@
 * Introduction
 Thus far we have spent quite a bit of time playing with values in elm, and mentioned that each of the values that we interact with has a type like ~Int~, ~String~, or ~Bool~. We will now take a closer look at what types are, their relation to values, and why we care about them.
 
+* Basic types, revisited
+** Bool
+The ~Bool~, or Boolean, type, represents logical truth. ~Bool~ has two variants, ~True~ and ~False~. The main functions
+- and
+- or
+- not
+- ==
+- <
+- >
+- <=
+- >=
+** Int
+- +
+- -
+- *
+- //
+- ... and others
+
+** Float
+
+** String
+
+** Tuples
+- Tuple.first
+- Tuple.second
+- Tuple.pair
+- Tuple.mapFirst
+- Tuple.mapSecond
+- Tuple.mapBoth
+
 * What the type?
-If values are specific things, you can think of types as the class of objects they belong to. You could, say, define a type ~Dog~, and then define values ~balto~ and ~laika~ that are of type ~Dog~. The typical parlance would be that "laika belongs to the type Dog", "balto is of type Dog", or "laika is a Dog" if you wanted to emphasize the type of these values. Notice that the type name ~Dog~ is capitalized and the values names ~laika~ and ~balto~ are not; elm enforces this convention. If you try to assign a value to a name that starts with a capital letter, elm gets confused:
+If values are specific things, you can think of types as the class of objects they belong to. You could, say, define a type ~Dog~, and then define values ~balto~ and ~laika~ that are of type ~Dog~. The typical parlance would be that "laika belongs to the type Dog", "balto is of type Dog", or "laika is a Dog" if you wanted to emphasize the type of these values.
+
+More formally, types are sets, or collections, of values.[fn:type-theory] ~Bool~ is the set of ~True~ and ~False~. ~Int~ is the set of all integers, ...-2, -1, 0, 1, 2, 3....[fn:int-size] ~String~ is the set of all possible strings.
+
+Note these collections of values have no intrinsic value in and of themselves. Types are useful to us because they group values along the lines that can be operated on similarly, in a sane manner. You can add any two ~Ints~. Divide two ~Floats~. Ask if any ~String~ is all uppercase. These operations all make sense on any value that fits their type.
+
+** Sidebar: capitalization
+
+Notice that the type name ~Dog~ is capitalized and the values names ~laika~ and ~balto~ are not; elm enforces this convention. If you try to assign a value to a name that starts with a capital letter, elm gets confused:
 #+BEGIN_SRC elm
 > foo = 1.2
 1.2 : Float
@@ -25,18 +63,11 @@ definitions to be indented exactly the same amount, so the problem may be that
 this new definition has too many spaces in front of it.
 #+END_SRC
 
+The single exception to this rule are /type constructors/(?), like ~True~ and ~False~. We'll cover these in more detail in a later chapter.
+
 
 ~0̵̞͒̉̈%̸̞̀̾͑̋ͅ2̷̯̌æ̷̪̪̬̥̌̉͒͝)̸̻̯͉̏̐͛̇)̴̹̞̬͗̊͘)̶̖̹͇̬͛͘~
 
-* Basic types, revisited
-** Bool
-
-** Int
-
-** Float
-
-** String
-
-** Tuples
-
 * Function types
+
+[fn:type-theory] Technically this is incorrect, and types are different than sets because reasons. Type theory is an active research area in mathematics, and there are efforts underway to rebuild all of mathematics on top of it as it solves some paradoxes. If you're interested in learning more, "Type Theory" and "Category theory" are decent search terms to start with.
