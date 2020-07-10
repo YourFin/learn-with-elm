@@ -1,3 +1,0 @@
-[submodule "website/vendor/elm"]
-	path = website/vendor/elm
-	url = https://github.com/elm/compiler.git
