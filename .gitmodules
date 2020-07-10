@@ -1,0 +1,3 @@
+[submodule "ide/vendor/elm-compiler"]
+	path = ide/vendor/elm-compiler
+	url = https://github.com/elm/compiler.git
