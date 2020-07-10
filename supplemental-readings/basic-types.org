@@ -24,6 +24,7 @@ The ~Bool~, or Boolean, type, represents logical truth. ~Bool~ has two variants,
 ** Float
 
 ** String
+ack
 
 ** Tuples
 - Tuple.first

@@ -1,1 +1,7 @@
 #+TITLE: List Processing
+
+* Review: List basics:
+Previously, you have explored writing your own functions, explored creating
+your own lists with list literals, ~range~, and ~singleton~, and doing basic manipulations on your lists with ~reverse~, ~head~, ~tail~, ~take~, and ~drop~. You've also explored the
+
+*
