@@ -1,0 +1,59 @@
+#+TITLE: Types Practice
+
+* Types 2: Cooking Boogaloo
+Today is your first day working at the hip new restaurant /Ulmus Glabra/. As you
+walk in, the hostess inquires "Are you the new cook?" You nod your head. "You're
+late." She grabs your arm. "Come this way. Hopefully Mr. Umet hasn't noticed."
+You shudder. Merlin Umet, the head chef here, seemed like a demanding boss.
+
+You turn the corner into the kitchen and immediately take stock of the room. You
+see the following available to you:
+
+#+BEGIN_SRC elm
+knife : Knife
+slice : Knife -> toCut -> Sliced toCut
+dice : Knife -> toCut -> Diced toCut
+oven : toCook -> Baked toCook
+resolveBaked : Baked (Unbaked a) -> a
+fruitFilling : Fruit -> Sweetener -> Mixable (Filling Fruit)
+mix : Mixable a -> a
+pieTin : Tin
+makeCrust : Tin -> Dough -> Crust
+assembleFruitPie : Crust -> Diced Fruit -> Unbaked Pie
+
+plateItem : item -> Plate item
+type alias Bread = Baked (Dough)
+
+appleOnTable : Fruit
+#+END_SRC
+
+"Ah, look, the new hire!" Merlin appears to be in the middle of assembling a
+fruit plate. "No no no James, you're doing it all wrong." As he rushes towards a
+chef who appears to have put a pot upside-down on the stove, Merlin asks over
+his shoulder "Hey new hire, can you slice those apples for me?" You dutifly
+comply, grabbing the ~Knife~ and ~appleOnTable~ that you saw earlier:
+
+#+BEGIN_SRC elm
+> slice knife appleOnTable
+#+END_SRC
+
+"Thanks for making me that ~Sliced Fruit~." Merlin says. "How about you help Felicia over there make soup." You walk towards the woman he motions to.
+
+1. "Hey, kid, get me some ~Diced Potato~". "Wait," you ask, I haven't seen a "~Potato~" here. Felicia motions towards a door. "The ~pantry~ is over there." You take a look:
+
+    #+BEGIN_SRC elm
+    pantry :
+        { sour : Dough
+        , sweet : Dough
+        , apple : Fruit
+        , cherry : Fruit
+        , blueberry : Fruit
+        , raspberry : Fruit
+        , blackberry : Fruit
+        , blue : Cheese
+        , goat : Cheese
+        , redPotato : Potato
+        }
+    #+END_SRC
+
+    Now, build an expression that will produce a ~Diced Potato~, like Felicia asked for.
