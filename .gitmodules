@@ -1,3 +1,6 @@
 [submodule "ide/vendor/elm-compiler"]
 	path = ide/vendor/elm-compiler
 	url = https://github.com/elm/compiler.git
+[submodule "ide/vendor/ghcjs-commonjs"]
+	path = ide/vendor/ghcjs-commonjs
+	url = https://github.com/beijaflor-io/ghcjs-commonjs.git
