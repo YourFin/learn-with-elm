@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+pushd "$(dirname "$0")/../" >/dev/null 2>/dev/null
+cleanup() {
+	popd >/dev/null 2>/dev/null
+}
+trap cleanup exit
+
+mkdir -p nix
+cd nix
+
+cabal2nix .. >ElmBrowser.nix
+cabal2nix ../vendor/ghcjs-commonjs/ghcjs-commonjs/ >ghcjs-commonjs.nix
+cabal2nix ../vendor/elm-compiler >elm-compiler.nix
+
+echo 'done'

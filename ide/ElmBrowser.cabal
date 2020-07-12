@@ -1,0 +1,15 @@
+cabal-version: 1.24
+
+name: ElmInBrowser
+version: 0.0.1
+licence: GPL3
+build-type: Simple
+
+executable elm-js
+  main-is: hs/Main.hs
+  ghc-options: -Wall
+  build-depends:
+      base
+    , text
+    , ghcjs-commonjs
+  default-language: Haskell2010

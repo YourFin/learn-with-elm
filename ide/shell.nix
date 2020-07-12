@@ -1,10 +1,14 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ nixpkgs ? import <nixpkgs> {}, compiler ? "ghcjs" }:
 
-with pkgs;
+#with pkgs;
 
-mkShell {
-  buildInputs = [
-    ghc
-    nodejs-13_x
-  ];
-}
+#mkShell {
+#  buildInputs = [
+#    haskell.compiler.${compiler}.ghcWithPackages (hpkgs: with hpkgs: [
+#      text
+#    ]);
+#    nodejs-13_x
+#  ];
+#}
+
+(import ./default.nix { inherit nixpkgs compiler; }).env
